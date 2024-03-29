@@ -12,20 +12,22 @@ function App() {
   ]);
   const [name, setName] = useState('')
   const handleAddTask = (name) => {
-    if(name == '' || name == null){ 
+    let nameTask = name.trim();
+    if(nameTask == '' || nameTask == null){ 
       return alert('Please enter Task name')
     }
-    setMyTasks([...myTasks, { id: myTasks.length + 1, name: name }]);
+    setMyTasks([...myTasks, { id: myTasks.length + 1, name: nameTask }]);
     setName('')
   };
-  
+      
 
   const handleDeleteTask = (id) => {
     setMyTasks(myTasks.filter((task) => task.id !== id));
   };
-  const handleUpdateTask = (task2) => {
-    const item = myTasks.filter((task) => task.id !== task2.id);
-    setMyTasks([...item,task2])
+  const handleUpdateTask = (id, newName) => {
+    const task = myTasks.find((task) => task.id === id);
+    task.name = newName;
+    setMyTasks([...myTasks]);
   };
 
   return (
